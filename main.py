@@ -8,7 +8,7 @@ vid = cv2.VideoCapture("./Video/mili.mp4")
 currentFrame = 0
 length = int(vid.get(cv2.CAP_PROP_FRAME_COUNT))
 
-token = 'EAAHyLBJeZB38BAMemF15bjzRe5WD04BPDaKMRfDqn3msqzsZC1Rq90m6fNzvTZAjqL0PVGmAHBaTQPy7I6CKHeMaI7fk1lae6dmQAzV1p9HuCkofRmUuQIZAZBkukHICdxaO4amhksoFiCbuxvJBxkmdFgLZCmIZAsuKRE6ZA70QOEUsWlOWmRkl6ZBK9wWLQv2EE3yxJ7grICwZDZD'
+token = 'EAAHyLBJeZB38BAJQLYiJB19b4ydi3aZBRFXiC4YJ0BZCPUgbP9jGpn0rZBo7DWGgDm42BZBhZAvDUurH7GIuXZCBdel61s3ntau7I5RQlHjHnkDyKL8eqagbG6nKX197DZCWkT9rZC5fDAZBQqhFwlLIBKZBEcyYS4EJZCXEonMWTnWErQZDZD'
 fb = facebook.GraphAPI(access_token=token)
 
 if os.path.isdir('./frames'):
@@ -33,3 +33,5 @@ while currentFrame < length:
     currentFrame += 1
     if currentFrame == 10:
         break
+
+exit()
