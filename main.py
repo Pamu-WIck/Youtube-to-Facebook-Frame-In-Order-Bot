@@ -6,6 +6,8 @@ import os
 import You2Dow
 
 link = "https://www.youtube.com/watch?v=M9dVG82QynM&ab_channel=IRAJ"
+# https://www.youtube.com/watch?v=jNQXAC9IVRw&ab_channel=jawed
+
 You2Dow.Download(link)
 yt = You2Dow.YouTube(link)
 title = yt.title
@@ -31,7 +33,7 @@ while currentFrame < length:
         image = open(imagePath, 'rb')
         fb.put_photo(image=image, message=title + " " + str(currentFrame//limit) + " out of " + str(length//limit))
         print("Uploaded " + str(currentFrame))
-        time.sleep(8)
+        time.sleep(10)
 
     # if os.path.isfile('./frames/' + str(currentFrame - 1) + '.jpg'):
     #     os.remove('./frames/' + str(currentFrame - 1) + '.jpg')
