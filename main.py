@@ -7,41 +7,37 @@ import You2Dow
 
 link = input("Enter the YouTube video URL: ")
 
-while link != "q":
+vidPath = './Video'
+for f in os.listdir(vidPath):
+    os.remove(os.path.join(vidPath, f))
 
-    if os.path.isdir('./Video'):
-        shutil.rmtree('./Video')
-        os.mkdir('./Video')
+You2Dow.Download(link)
+yt = You2Dow.YouTube(link)
+title = yt.title
 
-    You2Dow.Download(link)
-    yt = You2Dow.YouTube(link)
-    title = yt.title
+vid = cv2.VideoCapture("./Video/" + title + ".mp4")
+currentFrame = 1
+length = int(vid.get(cv2.CAP_PROP_FRAME_COUNT))
 
-    vid = cv2.VideoCapture("./Video/"+title+".mp4")
-    currentFrame = 1
-    length = int(vid.get(cv2.CAP_PROP_FRAME_COUNT))
+token = 'EAAHyLBJeZB38BAB7jLM96FKYB0bm4q3vHCqxIiS2itOgKG1VHZCdxpvoyPMp4OeqipiTh4r4Gd86LGb8p4GnE62DADkuK11xRMqZB1GoBtZBZBmnlhC9kedyfUTk17k16GhVRkMC6DjxpJ2SVvZBcol4L60HuK8Phvq8ZCa3x4KCGMUAKzzl8OD'
+fb = facebook.GraphAPI(access_token=token)
 
-    token = 'EAAHyLBJeZB38BANjm3mb5cxllT3ZA0XZBcUzsZA2cHtut0tkGI8qsZAKcZCZBYZBwZByxqSx7gslZBJzdc6DVVVIxWV9DEQjRNXOfNZCNKP7y1TAcLJOdWyVoPCBvNY8imXn26Q6qmZAlkJGXnZB7Tnd2V6LoINBcgN2DK5ZAwhdi68ZAJIe9Qn6mlrZBZCmjJYWjCpMxtUYPZCTYe8BZAkfwZDZD'
-    fb = facebook.GraphAPI(access_token=token)
+if not os.path.isdir('./frames'):
+    os.mkdir('./frames')
 
+while currentFrame <= length:
 
-    if not os.path.isdir('./frames'):
-        os.mkdir('./frames')
+    success, frame = vid.read()
+    imagePath = './frames/' + str(currentFrame) + '.jpg'
+    cv2.imwrite(imagePath, frame)
+    image = open(imagePath, 'rb')
+    fb.put_photo(image=image, message=title + " " + str(currentFrame) + " out of " + str(length))
+    print("Uploaded " + str(currentFrame))
+    time.sleep(1)
 
-    while currentFrame <= length:
+    if os.path.isfile('./frames/' + str(currentFrame - 1) + '.jpg'):
+        os.remove('./frames/' + str(currentFrame - 1) + '.jpg')
 
-        success, frame = vid.read()
-        imagePath = './frames/' + str(currentFrame) + '.jpg'
-        cv2.imwrite(imagePath, frame)
-        image = open(imagePath, 'rb')
-        fb.put_photo(image=image, message="dd")
-        print("Uploaded "+str(currentFrame))
-        time.sleep(1)
+    currentFrame += 1
 
-        if os.path.isfile('./frames/' + str(currentFrame-1) + '.jpg'):
-            os.remove('./frames/' + str(currentFrame-1) + '.jpg')
-
-        currentFrame =+ 1
-
-    currentFrame = 1
-    link = input("Enter the YouTube video URL: ")
+# link = input("Enter the YouTube video URL: ")
