@@ -33,7 +33,7 @@ while currentFrame < length:
         image = open(imagePath, 'rb')
         fb.put_photo(image=image, message=title + " " + str(currentFrame//limit) + " out of " + str(length//limit))
         print("Uploaded " + str(currentFrame))
-        time.sleep(10)
+        time.sleep(60)
 
     # if os.path.isfile('./frames/' + str(currentFrame - 1) + '.jpg'):
     #     os.remove('./frames/' + str(currentFrame - 1) + '.jpg')
