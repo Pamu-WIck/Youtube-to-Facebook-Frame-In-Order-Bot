@@ -12,7 +12,7 @@ title = yt.title
 
 vid = cv2.VideoCapture("./Video/" + title + ".mp4")
 currentFrame = 1
-fake = 1
+limit = 8
 length = int(vid.get(cv2.CAP_PROP_FRAME_COUNT))
 
 token = 'EAAHyLBJeZB38BAB7jLM96FKYB0bm4q3vHCqxIiS2itOgKG1VHZCdxpvoyPMp4OeqipiTh4r4Gd86LGb8p4GnE62DADkuK11xRMqZB1GoBtZBZBmnlhC9kedyfUTk17k16GhVRkMC6DjxpJ2SVvZBcol4L60HuK8Phvq8ZCa3x4KCGMUAKzzl8OD'
@@ -25,16 +25,18 @@ while currentFrame < length:
 
     success, frame = vid.read()
     imagePath = './frames/' + str(currentFrame) + '.jpg'
-    cv2.imwrite(imagePath, frame)
-    image = open(imagePath, 'rb')
-    fb.put_photo(image=image, message=title + " " + str(fake) + " out of " + str(length//2))
-    fake += 1
-    print("Uploaded " + str(currentFrame))
-    time.sleep(0.5)
 
-    if os.path.isfile('./frames/' + str(currentFrame - 2) + '.jpg'):
-        os.remove('./frames/' + str(currentFrame - 2) + '.jpg')
+    if (currentFrame % limit) == 0:
+        cv2.imwrite(imagePath, frame)
+        image = open(imagePath, 'rb')
+        fb.put_photo(image=image, message=title + " " + str(currentFrame//limit) + " out of " + str(length//limit))
+        print("Uploaded " + str(currentFrame))
+        time.sleep(8)
 
-    currentFrame += 2
+    # if os.path.isfile('./frames/' + str(currentFrame - 1) + '.jpg'):
+    #     os.remove('./frames/' + str(currentFrame - 1) + '.jpg')
+
+    currentFrame += 1
 
 time.sleep(86400)
+
