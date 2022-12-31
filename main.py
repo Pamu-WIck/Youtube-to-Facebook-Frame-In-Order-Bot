@@ -14,7 +14,7 @@ title = yt.title
 
 vid = cv2.VideoCapture("./Video/" + title + ".mp4")
 currentFrame = 1
-limit = 8
+limit = 4
 length = int(vid.get(cv2.CAP_PROP_FRAME_COUNT))
 
 token = 'EAAHyLBJeZB38BAB7jLM96FKYB0bm4q3vHCqxIiS2itOgKG1VHZCdxpvoyPMp4OeqipiTh4r4Gd86LGb8p4GnE62DADkuK11xRMqZB1GoBtZBZBmnlhC9kedyfUTk17k16GhVRkMC6DjxpJ2SVvZBcol4L60HuK8Phvq8ZCa3x4KCGMUAKzzl8OD'
