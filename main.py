@@ -5,7 +5,7 @@ import cv2
 import os
 import You2Dow
 
-link = "https://www.youtube.com/watch?v=M9dVG82QynM&ab_channel=IRAJ"
+link = "https://www.youtube.com/watch?v=Q-v4LsbFc5c&ab_channel=TomScott"
 # https://www.youtube.com/watch?v=jNQXAC9IVRw&ab_channel=jawed
 
 You2Dow.Download(link)
