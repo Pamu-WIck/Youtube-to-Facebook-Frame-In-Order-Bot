@@ -15,6 +15,8 @@ title = yt.title
 vid = cv2.VideoCapture("./Video/" + title + ".mp4")
 currentFrame = 1
 limit = 4
+startFrame = 40
+
 length = int(vid.get(cv2.CAP_PROP_FRAME_COUNT))
 
 token = 'EAAHyLBJeZB38BAB7jLM96FKYB0bm4q3vHCqxIiS2itOgKG1VHZCdxpvoyPMp4OeqipiTh4r4Gd86LGb8p4GnE62DADkuK11xRMqZB1GoBtZBZBmnlhC9kedyfUTk17k16GhVRkMC6DjxpJ2SVvZBcol4L60HuK8Phvq8ZCa3x4KCGMUAKzzl8OD'
@@ -28,7 +30,7 @@ while currentFrame < length:
     success, frame = vid.read()
     imagePath = './frames/' + str(currentFrame) + '.jpg'
 
-    if (currentFrame % limit) == 0:
+    if (currentFrame % limit) == 0 and currentFrame > startFrame:
         cv2.imwrite(imagePath, frame)
         image = open(imagePath, 'rb')
         fb.put_photo(image=image, message=title + " " + str(currentFrame//limit) + " out of " + str(length//limit))
