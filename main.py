@@ -15,7 +15,7 @@ title = yt.title
 vid = cv2.VideoCapture("./Video/" + title + ".mp4")
 currentFrame = 1
 limit = 4
-startFrame = 40
+startFrame = 5000
 
 length = int(vid.get(cv2.CAP_PROP_FRAME_COUNT))
 
@@ -37,8 +37,8 @@ while currentFrame < length:
         print("Uploaded " + str(currentFrame))
         time.sleep(60)
 
-    # if os.path.isfile('./frames/' + str(currentFrame - 1) + '.jpg'):
-    #     os.remove('./frames/' + str(currentFrame - 1) + '.jpg')
+    if os.path.isfile('./frames/' + str(currentFrame - 1) + '.jpg'):
+        os.remove('./frames/' + str(currentFrame - 1) + '.jpg')
 
     currentFrame += 1
 
